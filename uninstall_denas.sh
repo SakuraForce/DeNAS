@@ -23,8 +23,9 @@ CONFIG_FILE="/etc/denas.conf"
 if [ ! -f "$CONFIG_FILE" ]; then
   echo -e "${RED}错误：未找到配置文件 $CONFIG_FILE${NC}"
   echo -e "${YELLOW}请手动输入共享目录路径:${NC}"
-  read -p "输入共享目录路径: " SHARE_DIR
+  read -rp "输入共享目录路径: " SHARE_DIR
 else
+  # shellcheck disable=1090
   source "$CONFIG_FILE"
   echo -e "${GREEN}从配置文件中读取到:${NC}"
   echo -e "共享目录: ${YELLOW}$SHARE_DIR${NC}"
@@ -33,7 +34,7 @@ else
 fi
 
 # ==================== 用户确认 ====================
-read -p "确定要彻底卸载DeNAS服务吗？此操作将删除所有配置且不可恢复！(y/N): " CONFIRM
+read -rp "确定要彻底卸载DeNAS服务吗？此操作将删除所有配置且不可恢复！(y/N): " CONFIRM
 if [[ ! "$CONFIRM" =~ [yY] ]]; then
   echo -e "${YELLOW}已取消卸载。${NC}"
   exit 0
@@ -56,7 +57,7 @@ rm -f /etc/exports           # 直接删除（不备份）
 
 # 共享目录处理
 if [ -d "$SHARE_DIR" ]; then
-  read -p "是否删除共享目录 $SHARE_DIR 及其所有内容？(y/N): " DEL_DATA
+  read -rp "是否删除共享目录 $SHARE_DIR 及其所有内容？(y/N): " DEL_DATA
   if [[ "$DEL_DATA" =~ [yY] ]]; then
     rm -rf "$SHARE_DIR"
     echo -e "${RED}已彻底删除共享目录数据。${NC}"

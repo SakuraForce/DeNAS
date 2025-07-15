@@ -26,15 +26,15 @@ START_TIME=$(date +%s)
 echo -e "${YELLOW}[步骤1/5] 请输入以下配置信息：${NC}"
 
 # 共享目录路径
-read -p "1. 输入NAS共享目录路径（默认：/mnt/denas/shared）: " SHARE_DIR
+read -rp "1. 输入NAS共享目录路径（默认：/mnt/denas/shared）: " SHARE_DIR
 SHARE_DIR=${SHARE_DIR:-"/mnt/denas/shared"}
 
 # SMB配置
-read -p "2. 输入SMB共享名称（默认：shared）: " SMB_SHARE_NAME
+read -rp "2. 输入SMB共享名称（默认：shared）: " SMB_SHARE_NAME
 SMB_SHARE_NAME=${SMB_SHARE_NAME:-"shared"}
 
 # NFS配置
-read -p "3. 输入允许访问NFS的IP段（默认：*）: " NFS_CLIENTS
+read -rp "3. 输入允许访问NFS的IP段（默认：*）: " NFS_CLIENTS
 NFS_CLIENTS=${NFS_CLIENTS:-"*"}
 
 # ==================== 检查并安装依赖 ====================
@@ -101,8 +101,8 @@ systemctl restart nfs-kernel-server
 echo -e "${YELLOW}[h5ai 配置]${NC}"
 
 # 询问域名和端口
-read -p "输入Caddy访问域名（留空使用IP）: " CADDY_DOMAIN
-read -p "输入h5ai端口号（默认80）: " CADDY_PORT
+read -rp "输入Caddy访问域名（留空使用IP）: " CADDY_DOMAIN
+read -rp "输入h5ai端口号（默认80）: " CADDY_PORT
 CADDY_PORT=${CADDY_PORT:-80}
 
 # 确定监听地址
